@@ -15,12 +15,18 @@ public class SuiteFarey {
 	/**Constructeur*/
 	public SuiteFarey(int n){
 		this.n=n;
-		this.suiteFarey=calculSuite(this.n);
+		this.suiteFarey=getSuite(this.n);
+	}
+	
+	/***/
+	public ArrayList <Fraction> getSuite(int n){
+		calculSuite(n);
+		tri();
+		return suiteFarey;
 	}
 	
 	/**Calcul des termes de la suite */
 	public ArrayList <Fraction> calculSuite(int p){
-
 		if (p==1){	
 			suiteFarey.add(new Fraction(0,1));
 			suiteFarey.add(new Fraction(1,1));
@@ -32,40 +38,33 @@ public class SuiteFarey {
 					suiteFarey.add(new Fraction (i,p));
 				}
 			}
-		}
-		
-		tri();
-		
+		}		
 		return suiteFarey;
 	}
+
+	
 		
 	//tri selection itératif
 	public void tri(){
 			
 		ArrayList <Float> F=new ArrayList<Float>();
-		try{
-			System.out.println(suiteFarey.get(2).getFloat());
-		}
-		catch (Exception e){
-			System.out.println(e.toString());
-		}
-//		/**transformer les  Fraction en float*/
-//		for (int j=0;j<this.suiteFarey.size();j++){
-//			F.set(j,this.suiteFarey.get(j).getFloat());
-//		}
-//		
-//		for (int i=0;i<=F.size()-2;i++){
-//			int min=i;
-//			for(int j=i+1;j<F.size();j++) 
-//				if (F.get(j)<F.get(min)) min=j;	
-//					if (min!=i) {
-//						/**permutation*/
-//						Fraction f=new Fraction(suiteFarey.get(i).getNumerator(),suiteFarey.get(i).getDenominator());
-//						suiteFarey.set(i, suiteFarey.get(min));
-//						F.set(min, f.getFloat());
-//					}
-//				}
 		
+		/**transformer les  Fraction en float*/
+		for (int j=0;j<this.suiteFarey.size();j++){
+			F.set(j,this.suiteFarey.get(j).getFloat());
+		}
+		
+		for (int i=0;i<=F.size()-2;i++){
+			int min=i;
+			for(int j=i+1;j<F.size();j++) 
+				if (F.get(j)<F.get(min)) min=j;	
+					if (min!=i) {
+						/**permutation*/
+						Fraction f=new Fraction(suiteFarey.get(i).getNumerator(),suiteFarey.get(i).getDenominator());
+						suiteFarey.set(i, suiteFarey.get(min));
+						F.set(min, f.getFloat());
+					}
+				}
 	}
 		
 		
@@ -88,17 +87,12 @@ public class SuiteFarey {
 		return n;
 	}
 
-	public void setN(int n) {
-		this.n = n;
-	}
-
 	public ArrayList<Fraction> getSuiteFarey() {
+		tri();
 		return suiteFarey;
 	}
 
-	public void setSuiteFarey(ArrayList<Fraction> suiteFarey) {
-		this.suiteFarey = suiteFarey;
-	}
+
 
 	@Override
 	public String toString() {
