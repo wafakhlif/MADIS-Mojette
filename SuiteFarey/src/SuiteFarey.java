@@ -15,15 +15,9 @@ public class SuiteFarey {
 	/**Constructeur*/
 	public SuiteFarey(int n){
 		this.n=n;
-		this.suiteFarey=getSuite(this.n);
+		this.suiteFarey=calculSuite(this.n);
 	}
 	
-	/***/
-	public ArrayList <Fraction> getSuite(int n){
-		calculSuite(n);
-		tri();
-		return suiteFarey;
-	}
 	
 	/**Calcul des termes de la suite */
 	public ArrayList <Fraction> calculSuite(int p){
@@ -39,6 +33,7 @@ public class SuiteFarey {
 				}
 			}
 		}		
+		tri();
 		return suiteFarey;
 	}
 
@@ -51,7 +46,7 @@ public class SuiteFarey {
 		
 		/**transformer les  Fraction en float*/
 		for (int j=0;j<this.suiteFarey.size();j++){
-			F.set(j,this.suiteFarey.get(j).getFloat());
+			F.add(this.suiteFarey.get(j).getFloat());
 		}
 		
 		for (int i=0;i<=F.size()-2;i++){
